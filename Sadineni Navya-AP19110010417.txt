@@ -1,0 +1,228 @@
+1.Write a C program to print preorder,inorder and postorder traversal on binary tree.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+
+    int data;
+    struct node* left;
+    struct node* right;
+};
+
+void inorder(struct node*root)
+{
+    if(root==NULL)
+    return;
+    inorder(root->left);
+    printf("%d-",root->data);
+    inorder(root->right);
+}
+
+void preorder(struct node*root)
+{
+    if(root==NULL)
+    return;
+    printf("%d-",root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void postorder(struct node*root)
+{
+    if(root==NULL)
+    return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d-",root->data);
+   
+}
+struct node*createNode(int valve)
+{
+    struct node*newNode=malloc(size_of(struct node));
+    newNode->data=valve;
+    newNode->left=NULL;
+    newNode->right=NULL;
+ 
+    return newNode;
+   
+}
+
+void main()
+{
+    struct node*root=createNode(1);
+    root->left=createNode(12);
+    root->right=createNode(9);
+   
+    root->left->left=createNode(10);
+    root->left->right=createNode(15);
+   
+   
+    printf("Inorder traversal\n");
+    inorder(root);
+   
+   
+    printf("\nPreorder traversal\n");
+    preorder(root);
+   
+   
+    printf("\nPostorder traversal\n");
+    postorder(root);
+   
+   
+}
+Output:
+9-11-12-6-8-
+Preorder traversal
+6-11-9-12-8
+Postorder traversal
+9-12-11-8-6-
+
+2.Write a C program to create and inorder traversal on Binary tree.
+#include<stdio.h>
+#include<stdlib.h>
+struct node {
+    int data;
+    struct node* left;
+    struct node* right;
+};
+struct node *newNode(int item)
+{
+    struct node *temp =  (struct node *)malloc(size_of(struct node));
+    temp->data = item;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+struct node* insert(struct node *node, int value)
+{
+if (node == NULL) return newNode(value);
+  if (value < node->data)
+        node->left  = insert(node->left, value);
+    else if (value > node->data)
+        node->right = insert(node->right, value);    
+return node;
+}  
+void inorder(struct node* root){
+    if(root == NULL) return;
+    inorder(root->left);
+    printf("%d ->", root->data);
+    inorder(root->right);
+}
+void main(){
+    struct node *root = NULL;
+    root = insert(root, 40);
+    insert(root, 20);
+    insert(root, 10);
+    insert(root, 30);
+    insert(root, 90);
+    insert(root, 70);
+    insert(root, 60);
+ printf("\ninorder traversal \n");
+    inorder(root);
+}
+Output:
+10->20->30->40->60->70->90->
+
+3.Write a C program for linear search algorithm.
+
+#include <stdio.h>
+void main()
+{
+int array[100],b,i,n;
+
+printf("enter the number of elements in array\n");
+scanf("%d",&n);
+printf("enter integer(s)\n");
+for(i=0;i<n;i++)
+    scanf("%d",&array[i]);
+printf("enter the number to search\n");
+scanf("%d",&b);
+ for(i=0;i<n;i++)  
+{
+    if (array[i]==b)
+    {
+          printf("%d is present at location %d.\n",b,i+1);
+               break;
+     }
+}
+if(i==n)
+  printf("%d is not present in the array.\n",b);
+return 0;
+}  
+Output:
+Enter the number of elements in array:
+4
+Enter integers:
+13
+16
+78
+9
+Enter the number to search:
+78
+78 is present at location 3.
+4.Write a C program for binary search algorithm.
+
+#include<stdio.h>
+int main()
+{
+    int i,n,first,last,j,middle,swap,b,array[100];
+    printf("enter number of elements\n");
+    scanf("%d",&n);
+    printf("enter the elements\n");
+    for(i=0;i<n;i++)
+    {
+      scanf("%d",&array[i]);
+    }
+    printf("enter value to search \n");
+    scanf("%d",&b);
+    first=0;
+    last=n-1;
+      for(i=0;i<n;i++)
+      {
+          for(j=0;j<n-1;j++)
+          {
+              if(array[j]>array[j+1])
+              {
+                  swap=array[j];
+                  array[j]=array[j+1];
+                  array[j+1]=swap;
+              }
+          }
+      }
+      while(first<=last)
+      {
+        middle=(first+last)/2;
+        if(array[middle]<b)
+        {
+         first=middle+1;
+        }
+        else if(array[middle]==b)
+        {
+            printf("%d found at location %d.\n",b,middle+1);
+            break;
+        }
+        else
+        {
+         last=middle-1;
+        }
+    }
+    if(first>last)
+    {
+        printf("not found%d isn't present in the list.\n",b);
+        return 0;
+    }
+}
+
+Output:
+Enter number of elements:
+6
+Enter the elements:
+12
+15
+23
+14
+6
+98
+Enter the element to search:
+12
+12 is found at location 1.
